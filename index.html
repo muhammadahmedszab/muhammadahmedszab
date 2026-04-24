@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kaaghazi Tech — Digital Freelance Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1612;
+    --ink-light: #3d3530;
+    --paper: #f7f3ec;
+    --paper-dark: #ede8df;
+    --accent: #c94f2a;
+    --accent-muted: #e8a88e;
+    --gold: #b8892a;
+    --muted: #8a7f74;
+    --white: #fdfaf6;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: rgba(247,243,236,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(26,22,18,0.08);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    background: var(--ink);
+    color: var(--paper) !important;
+    padding: 0.55rem 1.4rem;
+    border-radius: 2px;
+  }
+  .nav-cta:hover { background: var(--accent); color: var(--white) !important; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 0 4rem;
+    padding-top: 5rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 50%; height: 100%;
+    background: var(--paper-dark);
+    z-index: 0;
+  }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .hero-tag::before { content: '//  '; }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 5.5vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 440px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--white);
+    padding: 0.85rem 2rem;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--ink); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    padding: 0.85rem 2rem;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { background: var(--ink); color: var(--paper); transform: translateY(-2px); }
+
+  .hero-visual {
+    position: relative; z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .hero-card {
+    background: var(--white);
+    border: 1px solid rgba(26,22,18,0.1);
+    border-radius: 4px;
+    padding: 1.5rem;
+    position: relative;
+    animation: floatUp 0.8s ease both;
+  }
+  .hero-card:nth-child(2) { animation-delay: 0.15s; margin-left: 2rem; }
+  .hero-card:nth-child(3) { animation-delay: 0.3s; margin-left: 1rem; }
+  @keyframes floatUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card-label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+  .card-val {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .card-val.accent { color: var(--accent); }
+  .card-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.25rem;
+  }
+  .dot-grid {
+    position: absolute; bottom: -2rem; right: -2rem;
+    width: 120px; height: 120px;
+    background-image: radial-gradient(circle, rgba(26,22,18,0.15) 1px, transparent 1px);
+    background-size: 12px 12px;
+    z-index: 0;
+  }
+
+  /* ─── SECTION COMMONS ─── */
+  section { padding: 6rem 4rem; }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .section-label::before { content: '01 / '; }
+  .section-label.s2::before { content: '02 / '; }
+  .section-label.s3::before { content: '03 / '; }
+  .section-label.s4::before { content: '04 / '; }
+  .section-label.s5::before { content: '05 / '; }
+  .section-h2 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .section-h2 em { font-style: italic; color: var(--accent); }
+
+  /* ─── MARQUEE ─── */
+  .marquee-wrap {
+    overflow: hidden;
+    background: var(--ink);
+    padding: 1rem 0;
+    white-space: nowrap;
+  }
+  .marquee-track {
+    display: inline-block;
+    animation: marquee 22s linear infinite;
+  }
+  .marquee-track span {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--paper-dark);
+    padding: 0 2.5rem;
+    opacity: 0.7;
+  }
+  .marquee-track span.dot { color: var(--accent); opacity: 1; font-style: normal; font-size: 1.4rem; }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ─── SERVICES ─── */
+  #services { background: var(--paper); }
+  .services-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3.5rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .services-sub {
+    max-width: 380px;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: rgba(26,22,18,0.1);
+  }
+  .service-card {
+    background: var(--paper);
+    padding: 2.5rem 2rem;
+    transition: background 0.25s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card:hover { background: var(--white); }
+  .service-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--accent);
+    transition: width 0.35s ease;
+  }
+  .service-card:hover::after { width: 100%; }
+  .service-num {
+    font-family: var(--serif);
+    font-size: 3rem;
+    font-weight: 300;
+    color: rgba(26,22,18,0.08);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .service-icon {
+    width: 40px; height: 40px;
+    border: 1.5px solid var(--ink-light);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+  }
+  .service-title {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 0.8rem;
+    color: var(--ink);
+  }
+  .service-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+  .service-tags {
+    margin-top: 1.5rem;
+    display: flex; gap: 0.5rem; flex-wrap: wrap;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-light);
+    background: var(--paper-dark);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+  }
+
+  /* ─── PORTFOLIO ─── */
+  #portfolio { background: var(--ink); }
+  #portfolio .section-label { color: var(--accent-muted); }
+  #portfolio .section-h2 { color: var(--paper); }
+  #portfolio .section-h2 em { color: var(--accent); }
+  .portfolio-sub { color: var(--muted); font-size: 0.95rem; margin-top: 0.75rem; margin-bottom: 3rem; }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .portfolio-card {
+    border: 1px solid rgba(247,243,236,0.08);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.25s, border-color 0.25s;
+    cursor: pointer;
+  }
+  .portfolio-card:hover { transform: translateY(-4px); border-color: rgba(201,79,42,0.5); }
+  .portfolio-card.large { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; }
+  .portfolio-img {
+    height: 240px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif);
+    font-size: 4rem;
+    font-style: italic;
+    position: relative;
+    overflow: hidden;
+  }
+  .portfolio-card.large .portfolio-img { height: 100%; min-height: 280px; }
+  .p-bg-1 { background: linear-gradient(135deg, #1e3a5f 0%, #0d2137 100%); color: #4e8bc4; }
+  .p-bg-2 { background: linear-gradient(135deg, #3d1f0a 0%, #1e0f04 100%); color: var(--accent-muted); }
+  .p-bg-3 { background: linear-gradient(135deg, #1a2f1a 0%, #0d1a0d 100%); color: #5c9c5c; }
+  .portfolio-info { padding: 1.5rem; background: rgba(255,255,255,0.03); }
+  .portfolio-card.large .portfolio-info { display: flex; flex-direction: column; justify-content: center; }
+  .p-category {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .p-title {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--paper);
+    margin-bottom: 0.5rem;
+  }
+  .p-desc { font-size: 0.83rem; color: #6b645b; line-height: 1.7; }
+  .p-tech { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+  .p-tech span {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    color: #5a5248;
+    border: 1px solid rgba(247,243,236,0.08);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  /* ─── ABOUT ─── */
+  #about { background: var(--paper-dark); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .about-visual {
+    position: relative;
+  }
+  .about-photo-frame {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: var(--paper);
+    border: 1px solid rgba(26,22,18,0.1);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif);
+    font-size: 6rem;
+    font-style: italic;
+    color: rgba(26,22,18,0.08);
+    overflow: hidden;
+    position: relative;
+  }
+  .about-photo-frame::before {
+    content: '';
+    position: absolute; inset: 12px;
+    border: 1px solid rgba(26,22,18,0.06);
+    border-radius: 2px;
+  }
+  .about-badge {
+    position: absolute; bottom: -1.5rem; right: -1.5rem;
+    background: var(--accent);
+    color: var(--white);
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-family: var(--serif);
+    text-align: center;
+    line-height: 1.2;
+  }
+  .about-badge strong { font-size: 2rem; font-weight: 600; }
+  .about-badge small { font-size: 0.7rem; font-style: italic; }
+  .about-text { }
+  .about-intro {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--ink-light);
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    border-left: 3px solid var(--accent);
+    padding-left: 1.5rem;
+  }
+  .about-body { font-size: 0.93rem; color: var(--muted); line-height: 1.9; margin-bottom: 2rem; }
+  .skills-list {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+  .skill-chip {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid rgba(26,22,18,0.15);
+    padding: 0.35rem 0.8rem;
+    border-radius: 100px;
+  }
+
+  /* ─── STATS ─── */
+  .stats-strip {
+    background: var(--ink);
+    padding: 3.5rem 4rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    border-top: 1px solid rgba(247,243,236,0.06);
+    border-bottom: 1px solid rgba(247,243,236,0.06);
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--paper);
+    line-height: 1;
+    display: block;
+  }
+  .stat-num em { font-style: normal; color: var(--accent); }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    display: block;
+  }
+
+  /* ─── TESTIMONIALS ─── */
+  #testimonials { background: var(--white); }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .testi-card {
+    background: var(--paper);
+    border: 1px solid rgba(26,22,18,0.07);
+    border-radius: 4px;
+    padding: 2rem;
+    position: relative;
+  }
+  .testi-card::before {
+    content: '\201C';
+    font-family: var(--serif);
+    font-size: 5rem;
+    color: rgba(201,79,42,0.15);
+    line-height: 1;
+    position: absolute;
+    top: 0.5rem; left: 1.2rem;
+  }
+  .testi-text {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    line-height: 1.65;
+    color: var(--ink-light);
+    position: relative;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .testi-author { display: flex; align-items: center; gap: 1rem; }
+  .testi-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .testi-name { font-weight: 500; font-size: 0.9rem; color: var(--ink); }
+  .testi-role { font-size: 0.78rem; color: var(--muted); }
+  .stars { color: var(--gold); font-size: 0.8rem; margin-bottom: 0.2rem; letter-spacing: 2px; }
+
+  /* ─── CONTACT ─── */
+  #contact { background: var(--paper-dark); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .contact-info h3 {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+  .contact-info p { font-size: 0.88rem; color: var(--muted); line-height: 1.8; margin-bottom: 2rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--ink-light);
+  }
+  .contact-item-icon {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(26,22,18,0.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: var(--white);
+    border: 1px solid rgba(26,22,18,0.12);
+    border-radius: 2px;
+    padding: 0.75rem 1rem;
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus { border-color: var(--accent); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-submit {
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    padding: 0.9rem 2.5rem;
+    border-radius: 2px;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    align-self: flex-start;
+    margin-top: 0.5rem;
+  }
+  .form-submit:hover { background: var(--ink); transform: translateY(-2px); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink);
+    color: rgba(247,243,236,0.5);
+    padding: 3rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--paper);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+  .footer-logo span { color: var(--accent); }
+  .footer-tagline { font-size: 0.82rem; color: rgba(247,243,236,0.35); line-height: 1.7; }
+  .footer-col h4 {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(247,243,236,0.4);
+    margin-bottom: 1rem;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col ul a { color: rgba(247,243,236,0.55); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-col ul a:hover { color: var(--paper); }
+  .footer-bottom {
+    background: rgba(0,0,0,0.2);
+    padding: 1rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-bottom p { font-size: 0.75rem; color: rgba(247,243,236,0.25); }
+  .footer-bottom a { color: var(--accent); text-decoration: none; }
+
+  /* ─── ANIMATIONS ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; }
+    .hero::before { display: none; }
+    .hero-visual { display: none; }
+    .services-header { flex-direction: column; }
+    .services-grid { grid-template-columns: 1fr; gap: 1px; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .portfolio-card.large { grid-column: span 1; grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-badge { display: none; }
+    .stats-strip { grid-template-columns: repeat(2, 1fr); padding: 2rem 1.5rem; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 1.5rem; }
+    .footer-bottom { padding: 1rem 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Kaaghazi<span>.</span>Tech</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#testimonials">Clients</a></li>
+    <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-text">
+    <span class="hero-tag">Digital Freelance Studio</span>
+    <h1>Crafting<br/><em>Elegant</em><br/>Digital Craft</h1>
+    <p class="hero-sub">Kaaghazi Tech delivers precision-built web solutions — from pixel-perfect interfaces to scalable backend systems — for brands that value quality.</p>
+    <div class="hero-btns">
+      <a href="#portfolio" class="btn-primary">View Portfolio</a>
+      <a href="#contact" class="btn-outline">Start a Project</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="card-label">Completed Projects</div>
+      <div class="card-val">120<span style="color:var(--accent)">+</span></div>
+      <div class="card-desc">Across 18 countries worldwide</div>
+    </div>
+    <div class="hero-card">
+      <div class="card-label">Client Satisfaction</div>
+      <div class="card-val accent">98%</div>
+      <div class="card-desc">5-star ratings on Upwork & Fiverr</div>
+    </div>
+    <div class="hero-card">
+      <div class="card-label">Response Time</div>
+      <div class="card-val">≤ 2h</div>
+      <div class="card-desc">Average first response guarantee</div>
+    </div>
+    <div class="dot-grid"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Web Development</span><span class="dot">·</span>
+    <span>UI / UX Design</span><span class="dot">·</span>
+    <span>Mobile Applications</span><span class="dot">·</span>
+    <span>E-Commerce Stores</span><span class="dot">·</span>
+    <span>API Integration</span><span class="dot">·</span>
+    <span>WordPress</span><span class="dot">·</span>
+    <span>SEO Optimization</span><span class="dot">·</span>
+    <span>Brand Identity</span><span class="dot">·</span>
+    <span>Web Development</span><span class="dot">·</span>
+    <span>UI / UX Design</span><span class="dot">·</span>
+    <span>Mobile Applications</span><span class="dot">·</span>
+    <span>E-Commerce Stores</span><span class="dot">·</span>
+    <span>API Integration</span><span class="dot">·</span>
+    <span>WordPress</span><span class="dot">·</span>
+    <span>SEO Optimization</span><span class="dot">·</span>
+    <span>Brand Identity</span><span class="dot">·</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header reveal">
+    <div>
+      <span class="section-label">Services</span>
+      <h2 class="section-h2">What I <em>Build</em><br/>for You</h2>
+    </div>
+    <p class="services-sub">Every project begins with listening. I craft solutions that are not only beautiful but purposefully engineered for your goals.</p>
+  </div>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-icon">⚡</div>
+      <h3 class="service-title">Web Development</h3>
+      <p class="service-desc">Custom websites and web apps built from the ground up — fast, responsive, and scalable for any audience size.</p>
+      <div class="service-tags">
+        <span class="tag">React</span>
+        <span class="tag">Next.js</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">Laravel</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-icon">🎨</div>
+      <h3 class="service-title">UI / UX Design</h3>
+      <p class="service-desc">User-centered interfaces that are intuitive and aesthetically refined — designed in Figma and brought to life with precision.</p>
+      <div class="service-tags">
+        <span class="tag">Figma</span>
+        <span class="tag">Wireframing</span>
+        <span class="tag">Prototyping</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-icon">🛒</div>
+      <h3 class="service-title">E-Commerce</h3>
+      <p class="service-desc">High-converting online stores with seamless checkout flows, inventory management, and payment gateways.</p>
+      <div class="service-tags">
+        <span class="tag">Shopify</span>
+        <span class="tag">WooCommerce</span>
+        <span class="tag">Stripe</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-icon">📱</div>
+      <h3 class="service-title">Mobile Apps</h3>
+      <p class="service-desc">Cross-platform mobile applications that feel native on both iOS and Android, built efficiently with modern frameworks.</p>
+      <div class="service-tags">
+        <span class="tag">React Native</span>
+        <span class="tag">Flutter</span>
+        <span class="tag">Expo</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="service-icon">🔗</div>
+      <h3 class="service-title">API & Backend</h3>
+      <p class="service-desc">Robust RESTful and GraphQL APIs, database architecture, and cloud infrastructure that scales with your growth.</p>
+      <div class="service-tags">
+        <span class="tag">REST API</span>
+        <span class="tag">GraphQL</span>
+        <span class="tag">Firebase</span>
+        <span class="tag">AWS</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="service-icon">📈</div>
+      <h3 class="service-title">SEO & Growth</h3>
+      <p class="service-desc">Technical SEO audits, performance optimization, and analytics setup to drive organic traffic and measurable growth.</p>
+      <div class="service-tags">
+        <span class="tag">Core Web Vitals</span>
+        <span class="tag">Analytics</span>
+        <span class="tag">Speed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="reveal">
+    <span class="section-label s2">Portfolio</span>
+    <h2 class="section-h2">Selected <em>Work</em></h2>
+    <p class="portfolio-sub">A curated showcase of recent projects across industries.</p>
+  </div>
+  <div class="portfolio-grid reveal">
+    <div class="portfolio-card large">
+      <div class="portfolio-img p-bg-1">KT</div>
+      <div class="portfolio-info">
+        <div class="p-category">E-Commerce · Web App</div>
+        <h3 class="p-title">Noor Boutique — Online Fashion Store</h3>
+        <p class="p-desc">A full-stack Shopify build with custom Liquid theme, Stripe payment integration, and automated inventory sync. Increased conversion rate by 34%.</p>
+        <div class="p-tech">
+          <span>Shopify</span><span>Liquid</span><span>Stripe</span><span>Klaviyo</span>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-card">
+      <div class="portfolio-img p-bg-2" style="height:200px">RM</div>
+      <div class="portfolio-info">
+        <div class="p-category">SaaS · Dashboard</div>
+        <h3 class="p-title">ReachMe CRM</h3>
+        <p class="p-desc">A real estate CRM built on React + Firebase with real-time deal tracking and pipeline management.</p>
+        <div class="p-tech"><span>React</span><span>Firebase</span><span>Tailwind</span></div>
+      </div>
+    </div>
+    <div class="portfolio-card">
+      <div class="portfolio-img p-bg-3" style="height:200px">GF</div>
+      <div class="portfolio-info">
+        <div class="p-category">Mobile App · iOS & Android</div>
+        <h3 class="p-title">GreenFi Savings App</h3>
+        <p class="p-desc">A fintech savings app with smart goal tracking, notifications, and bank-level security using Expo + Node.js.</p>
+        <div class="p-tech"><span>React Native</span><span>Expo</span><span>Node.js</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-visual reveal">
+      <div class="about-photo-frame">KT</div>
+      <div class="about-badge">
+        <strong>5+</strong>
+        <small>years of craft</small>
+      </div>
+    </div>
+    <div class="about-text reveal">
+      <span class="section-label s3">About</span>
+      <h2 class="section-h2">The Mind<br/><em>Behind</em> the Work</h2>
+      <p class="about-intro">"Kaaghazi" — Urdu for paper — reflects my love for clean, deliberate design that communicates with clarity."</p>
+      <p class="about-body">I'm a full-stack developer and designer based in Karachi, specializing in turning complex ideas into beautiful, functional digital products. Every line of code I write is intentional — built for performance, scalability, and people.<br/><br/>I work with startups, SMEs, and global brands as a trusted freelance partner, delivering end-to-end digital solutions that create real business impact.</p>
+      <div class="skills-list">
+        <span class="skill-chip">JavaScript</span>
+        <span class="skill-chip">TypeScript</span>
+        <span class="skill-chip">React</span>
+        <span class="skill-chip">Next.js</span>
+        <span class="skill-chip">Node.js</span>
+        <span class="skill-chip">Python</span>
+        <span class="skill-chip">Laravel</span>
+        <span class="skill-chip">PostgreSQL</span>
+        <span class="skill-chip">MongoDB</span>
+        <span class="skill-chip">AWS</span>
+        <span class="skill-chip">Figma</span>
+        <span class="skill-chip">Docker</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip reveal">
+  <div class="stat-item">
+    <span class="stat-num">120<em>+</em></span>
+    <span class="stat-label">Projects Delivered</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">98<em>%</em></span>
+    <span class="stat-label">Client Satisfaction</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">5<em>+</em></span>
+    <span class="stat-label">Years Experience</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">18<em>+</em></span>
+    <span class="stat-label">Countries Served</span>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="reveal">
+    <span class="section-label s4">Testimonials</span>
+    <h2 class="section-h2">What Clients <em>Say</em></h2>
+  </div>
+  <div class="testimonials-grid reveal">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">Kaaghazi Tech delivered our e-commerce platform ahead of schedule. The attention to detail in both design and code was remarkable — truly a top-tier freelancer.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">SA</div>
+        <div>
+          <div class="testi-name">Sarah Al-Mansoori</div>
+          <div class="testi-role">CEO, Noor Boutique — Dubai</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">Our CRM dashboard is exactly what we envisioned and more. Communication was seamless, revisions were handled quickly, and the final product exceeded expectations.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">JM</div>
+        <div>
+          <div class="testi-name">James Mwangi</div>
+          <div class="testi-role">Founder, ReachMe — Nairobi</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">I've worked with many freelancers, but Kaaghazi Tech stands out for professionalism and quality. The mobile app launched without a single bug on day one.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">LP</div>
+        <div>
+          <div class="testi-name">Laura Park</div>
+          <div class="testi-role">Product Lead, GreenFi — Toronto</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <span class="section-label s5">Contact</span>
+      <h2 class="section-h2">Let's Build<br/>Something <em>Great</em></h2>
+      <p style="color:var(--muted);font-size:0.93rem;line-height:1.9;margin-top:1rem;margin-bottom:2rem;">Have a project in mind? I'd love to hear about it. Send me a message and I'll get back to you within 2 hours.</p>
+      <div class="contact-item">
+        <div class="contact-item-icon">📧</div>
+        <span>hello@kaaghazi.tech</span>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">📱</div>
+        <span>+92 300 000 0000</span>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">📍</div>
+        <span>Karachi, Pakistan (Remote Worldwide)</span>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">🕐</div>
+        <span>Available Mon – Sat, 9am – 10pm PKT</span>
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="Ahmed Khan"/>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="ahmed@company.com"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Service Needed</label>
+        <select>
+          <option>Web Development</option>
+          <option>UI / UX Design</option>
+          <option>E-Commerce</option>
+          <option>Mobile App</option>
+          <option>API & Backend</option>
+          <option>SEO & Growth</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Budget Range</label>
+          <select>
+            <option>$500 – $1,000</option>
+            <option>$1,000 – $3,000</option>
+            <option>$3,000 – $10,000</option>
+            <option>$10,000+</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Timeline</label>
+          <select>
+            <option>ASAP (Rush)</option>
+            <option>2–4 Weeks</option>
+            <option>1–2 Months</option>
+            <option>Flexible</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Project Details</label>
+        <textarea placeholder="Tell me about your project — what problem are you solving, who are your users, any references you like..."></textarea>
+      </div>
+      <button class="form-submit" onclick="this.textContent='Message Sent! ✓'; this.style.background='#2a8a4f'; setTimeout(()=>{this.textContent='Send Message'; this.style.background='';},3000)">Send Message</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <a href="#" class="footer-logo">Kaaghazi<span>.</span>Tech</a>
+    <p class="footer-tagline">A freelance digital studio crafting purposeful web experiences — built with care, delivered with excellence.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Navigation</h4>
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Connect</h4>
+    <ul>
+      <li><a href="#">Upwork Profile</a></li>
+      <li><a href="#">Fiverr Profile</a></li>
+      <li><a href="#">LinkedIn</a></li>
+      <li><a href="#">GitHub</a></li>
+      <li><a href="#">Dribbble</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2025 Kaaghazi Tech. All rights reserved.</p>
+  <p>Made with care in <a href="#">Karachi, Pakistan</a></p>
+</div>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(r => observer.observe(r));
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>
